@@ -31,12 +31,15 @@ p {
 
 .bold {
     font-weight: bold;
+    font-family: Serif
 }
 
 .italic {
     font-style: italic;
+    font-family: Sans-serif;
 }
 
 .smallCaps {
   font-variant: small-caps;
+  font-family: Monospace;
 }
