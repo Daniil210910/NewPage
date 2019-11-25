@@ -1,0 +1,21 @@
+a {
+    display: block;
+    margin-bottom: 20px;
+}
+
+a:link {
+    color: coral;
+}
+
+a:visited {
+    color: green;
+}
+
+a:hover {
+    padding: 5px;
+    background-color: yellow;
+}
+
+a:active {
+    color: red;
+}
