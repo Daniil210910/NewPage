@@ -40,11 +40,31 @@ function addNewItem(value, quadrant) {
     const list = quadrant.getElementsByClassName("toDoList")[0];
     const newLi = getLiWithText(value);
     list.appendChild(newLi);
-    console.log(list);
 }
 
 function getLiWithText(value) {
     const newLiItem = document.createElement("li");
+    const checkbox = getCheckBox();
     const text = document.createTextNode(value);
+    const space = document.createTextNode(" ");
+    const icon = getDeleteIcon();
+    newLiItem.appendChild(checkbox);
     newLiItem.appendChild(text);
+    newLiItem.appendChild(space);
+    newLiItem.appendChild(icon);
+
+    return newLiItem;
+}
+
+function getCheckBox() {
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    return input;
+
+}
+
+function getDeleteIcon() {
+    const i = document.createElement("i");
+    i.className = "fas fa-trash"
+    return i;
 }
