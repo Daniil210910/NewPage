@@ -2,16 +2,24 @@ let importantAndUrgent;
 let importantAndNotUrgent;
 let notImportantAndUrgent;
 let notImportantAndNotUrgent;
-let liInput;
+let liInput1;
+let liInput2;
+let liInput3;
+let liInput4;
 
 (function () {
     importantAndUrgent = document.getElementById("importantAndUrgent");
     importantAndNotUrgent = document.getElementById("importantAndNotUrgent");
     notImportantAndUrgent = document.getElementById("notImportantAndUrgent");
     notImportantAndNotUrgent = document.getElementById("notImportantAndNotUrgent");
-    liInput = document.getElementsByClassName("toDoList");
+    liInput1 = document.getElementsByClassName("toDoList")[0];
+    liInput2 = document.getElementsByClassName("toDoList")[1];
+    liInput3 = document.getElementsByClassName("toDoList")[2];
+    liInput4 = document.getElementsByClassName("toDoList")[3];
+
 
     quadrants = [importantAndUrgent, importantAndNotUrgent, notImportantAndUrgent, notImportantAndNotUrgent];
+
     quadrants.forEach(quadrant => {
         const button = quadrant.getElementsByTagName("button")[0];
         button.addEventListener("click", () => {
@@ -21,16 +29,19 @@ let liInput;
 
     });
 
-    searchInput = liInput.getElementsByTagName("input")[0];
-    searchInput.addEventListener("click");
+    liInputs = [liInput1, liInput2, liInput3, liInput4];
 
-    // console.log(liInput[2]);
+    liInputs.forEach(searchInput => {
+        const check = searchInput.getElementsByTagName("input");
+        check.addEventListener("click", () => {
 
-    // searchInput.forEach(searchInput => {
-    //     const doneInput = searchInput.getElementsByTagName("input")[0];
-    //     doneInput.addEventListener("click");
-    //     console.log(doneInput);
-    // });
+        });
+    });
+
+
+
+
+    // const p = liInput.getElementsByTagName("input");
 
 })();
 
