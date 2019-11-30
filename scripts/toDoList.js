@@ -2,22 +2,35 @@ let importantAndUrgent;
 let importantAndNotUrgent;
 let notImportantAndUrgent;
 let notImportantAndNotUrgent;
+let liInput;
 
 (function () {
     importantAndUrgent = document.getElementById("importantAndUrgent");
     importantAndNotUrgent = document.getElementById("importantAndNotUrgent");
     notImportantAndUrgent = document.getElementById("notImportantAndUrgent");
     notImportantAndNotUrgent = document.getElementById("notImportantAndNotUrgent");
+    liInput = document.getElementsByClassName("toDoList");
 
     quadrants = [importantAndUrgent, importantAndNotUrgent, notImportantAndUrgent, notImportantAndNotUrgent];
-
     quadrants.forEach(quadrant => {
         const button = quadrant.getElementsByTagName("button")[0];
         button.addEventListener("click", () => {
             addNewTask(quadrant);
         });
-        // console.log(button);
+
+
     });
+
+    searchInput = liInput.getElementsByTagName("input")[0];
+    searchInput.addEventListener("click");
+
+    // console.log(liInput[2]);
+
+    // searchInput.forEach(searchInput => {
+    //     const doneInput = searchInput.getElementsByTagName("input")[0];
+    //     doneInput.addEventListener("click");
+    //     console.log(doneInput);
+    // });
 
 })();
 
