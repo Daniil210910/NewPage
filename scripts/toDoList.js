@@ -45,8 +45,9 @@ function removeLi(trashI) {
 
 };
 
-function markAsDone(checkbox, quadrant) {
-    const liTask = checkbox.parentElement;
+function markAsDone(check, quadrant) {
+    const liTask = check.parentElement;
+    console.log(liTask);
     const done = Array.from(quadrant.getElementsByClassName("done-list"));
     done.forEach(eachLi => {
         eachLi.appendChild(liTask);
@@ -55,10 +56,10 @@ function markAsDone(checkbox, quadrant) {
 
 };
 
-function addNewTask(quadrant) {
+function addNewTask(quadrant, check) {
     const value = getInputValue(quadrant);
     if (value) {
-        addNewItem(value, quadrant);
+        addNewItem(value, check, quadrant);
 
     } else {
         alert("Please add value to input")
@@ -70,15 +71,15 @@ function getInputValue(quadrant) {
 
 }
 
-function addNewItem(value, quadrant) {
+function addNewItem(value, check, quadrant) {
     const list = quadrant.getElementsByClassName("toDoList")[0];
-    const newLi = getLiWithText(value);
+    const newLi = getLiWithText(value, check, quadrant);
     list.appendChild(newLi);
 }
 
-function getLiWithText(value) {
+function getLiWithText(value, check, quadrant) {
     const newLiItem = document.createElement("li");
-    const checkbox = getCheckBox();
+    const checkbox = getCheckBox(check, quadrant);
     const text = document.createTextNode(value);
     const space = document.createTextNode(" ");
     const icon = getDeleteIcon();
@@ -91,11 +92,11 @@ function getLiWithText(value) {
     return newLiItem;
 }
 
-function getCheckBox(check, quadrant) {
+function getCheckBox(check, quadrant, liTask) {
     const input = document.createElement("input");
     input.type = "checkbox";
     input.addEventListener("click", () => {
-        markAsDone(check, quadrant);
+        markAsDone(check, quadrant, liTask);
     });
     return input;
 
