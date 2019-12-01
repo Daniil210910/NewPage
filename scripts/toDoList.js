@@ -2,10 +2,6 @@ let importantAndUrgent;
 let importantAndNotUrgent;
 let notImportantAndUrgent;
 let notImportantAndNotUrgent;
-let liInput1;
-let liInput2;
-let liInput3;
-let liInput4;
 
 (function () {
     importantAndUrgent = document.getElementById("importantAndUrgent");
@@ -24,31 +20,40 @@ let liInput4;
 
         const toDoList = quadrant.getElementsByClassName("toDoList")[0];
         const searchInput = Array.from(toDoList.getElementsByTagName("input"));
-        // console.log(searchInput);
         searchInput.forEach(check => {
             check.addEventListener("click", () => {
-                markAsDone(check);
+                markAsDone(check, quadrant);
             });
         });
+
+        const trash = Array.from(quadrant.getElementsByTagName("i"));
+        trash.forEach(trashI => {
+            trashI.addEventListener("click", () => {
+                removeLi(trashI);
+            });
+        });
+
 
 
     });
 
 })();
 
-function markAsDone(checkbox) {
+function removeLi(trashI) {
+    const deleteLi = trashI.parentElement;
+    deleteLi.remove();
+
+};
+
+function markAsDone(checkbox, quadrant) {
     const liTask = checkbox.parentElement;
-    const done = Array.from(document.getElementsByClassName("done-list"));
+    const done = Array.from(quadrant.getElementsByClassName("done-list"));
     done.forEach(eachLi => {
         eachLi.appendChild(liTask);
     });
 
 
 };
-
-// function addInDone(checkbox) {
-// const p = document.getElementsByClassName("done-list");
-// };
 
 function addNewTask(quadrant) {
     const value = getInputValue(quadrant);
@@ -77,6 +82,7 @@ function getLiWithText(value) {
     const text = document.createTextNode(value);
     const space = document.createTextNode(" ");
     const icon = getDeleteIcon();
+
     newLiItem.appendChild(checkbox);
     newLiItem.appendChild(text);
     newLiItem.appendChild(space);
@@ -85,10 +91,12 @@ function getLiWithText(value) {
     return newLiItem;
 }
 
-function getCheckBox() {
+function getCheckBox(check, quadrant) {
     const input = document.createElement("input");
     input.type = "checkbox";
-
+    input.addEventListener("click", () => {
+        markAsDone(check, quadrant);
+    });
     return input;
 
 }
