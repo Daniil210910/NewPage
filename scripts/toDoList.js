@@ -12,10 +12,6 @@ let liInput4;
     importantAndNotUrgent = document.getElementById("importantAndNotUrgent");
     notImportantAndUrgent = document.getElementById("notImportantAndUrgent");
     notImportantAndNotUrgent = document.getElementById("notImportantAndNotUrgent");
-    liInput1 = document.getElementsByClassName("toDoList")[0];
-    liInput2 = document.getElementsByClassName("toDoList")[1];
-    liInput3 = document.getElementsByClassName("toDoList")[2];
-    liInput4 = document.getElementsByClassName("toDoList")[3];
 
 
     quadrants = [importantAndUrgent, importantAndNotUrgent, notImportantAndUrgent, notImportantAndNotUrgent];
@@ -26,24 +22,30 @@ let liInput4;
             addNewTask(quadrant);
         });
 
-
-    });
-
-    liInputs = [liInput1, liInput2, liInput3, liInput4];
-
-    liInputs.forEach(searchInput => {
-        const check = searchInput.getElementsByTagName("input");
-        check.addEventListener("click", () => {
-
+        const toDoList = quadrant.getElementsByClassName("toDoList")[0];
+        const searchInput = Array.from(toDoList.getElementsByTagName("input"));
+        // console.log(searchInput);
+        searchInput.forEach(check => {
+            check.addEventListener("click", () => {
+                markAsDone(check);
+            });
         });
+
+
     });
-
-
-
-
-    // const p = liInput.getElementsByTagName("input");
 
 })();
+
+function markAsDone(checkbox) {
+    const liTask = checkbox.parentElement;
+    const done = Array.from(document.getElementsByClassName("done-list"));
+    done.appendChild(checkbox);
+
+};
+
+// function addInDone(checkbox) {
+// const p = document.getElementsByClassName("done-list");
+// };
 
 function addNewTask(quadrant) {
     const value = getInputValue(quadrant);
@@ -83,6 +85,7 @@ function getLiWithText(value) {
 function getCheckBox() {
     const input = document.createElement("input");
     input.type = "checkbox";
+
     return input;
 
 }
