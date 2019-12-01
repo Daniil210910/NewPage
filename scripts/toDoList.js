@@ -39,7 +39,10 @@ let liInput4;
 function markAsDone(checkbox) {
     const liTask = checkbox.parentElement;
     const done = Array.from(document.getElementsByClassName("done-list"));
-    done.appendChild(checkbox);
+    done.forEach(eachLi => {
+        eachLi.appendChild(liTask);
+    });
+
 
 };
 
