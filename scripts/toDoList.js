@@ -27,9 +27,9 @@ let notImportantAndNotUrgent;
         });
 
         const done = quadrant.getElementsByClassName("done-list")[0];
-        const doneCheck = Array.from(done.getElementsByTagName("input"));
-        doneCheck.forEach(firstDone => {
-            firstDone.addEventListener("click", () => {
+        const doneChecks = Array.from(done.getElementsByTagName("input"));
+        doneChecks.forEach(check => {
+            check.addEventListener("click", () => {
                 markNotDone(check, quadrant);
             });
         });
