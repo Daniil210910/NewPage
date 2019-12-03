@@ -26,6 +26,15 @@ let notImportantAndNotUrgent;
             });
         });
 
+        const done = quadrant.getElementsByClassName("done-list")[0];
+        const doneCheck = Array.from(done.getElementsByTagName("input"));
+        doneCheck.forEach(firstDone => {
+            firstDone.addEventListener("click", () => {
+                markNotDone(check, quadrant);
+            });
+        });
+
+
         const trash = Array.from(quadrant.getElementsByTagName("i"));
         trash.forEach(trashI => {
             trashI.addEventListener("click", () => {
