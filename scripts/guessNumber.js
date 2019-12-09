@@ -2,7 +2,7 @@ let randomNumber;
 let input;
 
 (function () {
-    randomNumber = getRandomNumber(100);
+    randomNumber = getRandomNumber(10);
     input = document.getElementById("checkField");
     const checkBtn = document.getElementById("checkBtn");
 
