@@ -47,8 +47,6 @@ const users = [
 users.forEach(user => {
   if (user.visitedPark == true || user.boughtItems == true) {
     console.log("yes")
-  } else {
-    console.log("no");
   }
 });
 
