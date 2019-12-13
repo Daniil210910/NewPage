@@ -89,8 +89,8 @@ function showNotFoundSection() {
 }
 
 function showResultListSection() {
-  document.querySelector(".resultList").style.display = "none";
-  document.querySelector(".notFound").style.display = "block";
+  document.querySelector(".resultList").style.display = "block";
+  document.querySelector(".notFound").style.display = "none";
 }
 
 
