@@ -55,7 +55,8 @@ function filterList() {
     const filteredClients = clients.filter((client) => {
       return client.firstName.toLowerCase().includes(filterString) ||
         client.lastName.toLowerCase().includes(filterString) ||
-        client.email.toLowerCase().includes(filterString)
+        client.email.toLowerCase().includes(filterString) ||
+        client.gender.toLowerCase().includes(filterString)
     });
 
     refreshData(filteredClients);
