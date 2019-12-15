@@ -38,9 +38,11 @@ function sortList(order) {
 };
 
 function sortGender(genderValue) {
-  const p = clients.sort((client) => {
+  const p = clients.filter((client) => {
     if (genderValue == 'Male') {
-      console.log("Male");
+      return client.gender == genderValue;
+    } else {
+      return client.gender == genderValue;
     }
   });
   refreshData(p);
