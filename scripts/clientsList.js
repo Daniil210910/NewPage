@@ -37,9 +37,19 @@ function sortList(order) {
   refreshData(sortedClients);
 };
 
-function refreshData(updatedClients) {
+function sortGender(genderValue) {
+  const p = clients.sort((client) => {
+    if (genderValue == 'Male') {
+      console.log("Male");
+    }
+  });
+  refreshData(p);
+}
+
+
+function refreshData(updatedClients, p) {
   clearList();
-  displayData(updatedClients);
+  displayData(updatedClients, p);
 }
 
 function clearList() {
@@ -60,8 +70,10 @@ function filterList() {
     });
 
     refreshData(filteredClients);
-    filteredClients.length === 0 ?
-      showNotFoundSection() : showResultListSection();
+    if (filteredClients.length === 0) {
+      showNotFoundSection(filteredClients);
+    }
+
 
   } else {
     refreshData(clients);
@@ -83,15 +95,18 @@ function removeCurrencyFromAmount(amount) {
   return Number(amount.slice(1));
 }
 
-function showNotFoundSection() {
-  document.querySelector(".resultList").style.display = "none";
-  document.querySelector(".notFound").style.display = "block";
-
+function showNotFoundSection(filteredClients) {
+  if (filteredClients === 0) {
+    document.querySelector(".resultList").style.display = "none";
+    document.querySelector(".notFound").style.display = "block";
+  } else {
+    document.querySelector(".resultList").style.display = "block";
+    document.querySelector(".notFound").style.display = "none";
+  }
 }
 
 function showResultListSection() {
-  document.querySelector(".resultList").style.display = "block";
-  document.querySelector(".notFound").style.display = "none";
+
 }
 
 
