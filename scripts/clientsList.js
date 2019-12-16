@@ -38,20 +38,20 @@ function sortList(order) {
 };
 
 function sortGender(genderValue) {
-  const p = clients.filter((client) => {
+  const filterGender = clients.filter((client) => {
     if (genderValue == 'Male') {
       return client.gender == genderValue;
     } else {
       return client.gender == genderValue;
     }
   });
-  refreshData(p);
+  refreshData(filterGender);
 }
 
 
-function refreshData(updatedClients, p) {
+function refreshData(updatedClients, filterGender) {
   clearList();
-  displayData(updatedClients, p);
+  displayData(updatedClients, filterGender);
 }
 
 function clearList() {
@@ -73,7 +73,11 @@ function filterList() {
 
     refreshData(filteredClients);
     if (filteredClients.length === 0) {
-      showNotFoundSection(filteredClients);
+      document.querySelector(".resultList").style.display = "none";
+      document.querySelector(".notFound").style.display = "block";
+    } else {
+      document.querySelector(".resultList").style.display = "block";
+      document.querySelector(".notFound").style.display = "none";
     }
 
 
@@ -95,16 +99,6 @@ function sumAmount(clientsList = clients) {
 
 function removeCurrencyFromAmount(amount) {
   return Number(amount.slice(1));
-}
-
-function showNotFoundSection(filteredClients) {
-  if (filteredClients === 0) {
-    document.querySelector(".resultList").style.display = "none";
-    document.querySelector(".notFound").style.display = "block";
-  } else {
-    document.querySelector(".resultList").style.display = "block";
-    document.querySelector(".notFound").style.display = "none";
-  }
 }
 
 function showResultListSection() {
