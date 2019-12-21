@@ -1,3 +1,9 @@
+const database = firebase.database();
+const clientsRef = database.ref("clients-list-c2c6a");
+clientsRef.on("value", (snapshot) => {
+  console.log(snapshot.val());
+});
+
 const clients = [
   {
     id: 1,
