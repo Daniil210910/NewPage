@@ -1,4 +1,5 @@
 function displayData(clientsList = clients) {
+  clearList()
   const ul = document.querySelector('#clientsData');
   sumAmount(clientsList);
   clientsList.forEach(client => {
@@ -11,7 +12,7 @@ function displayData(clientsList = clients) {
     const mailLink = document.createElement('a');
     avatar.setAttribute('src', client.avatar);
     const textPart1 = document.createTextNode(
-      `${client.lastName} ${client.firstName} - `
+      `${client.last_name} ${client.first_name} - `
     );
     mailLink.setAttribute('href', `mailto:${client.email}`)
     mailLink.innerHTML = client.email;
@@ -64,9 +65,10 @@ function clearList() {
 function filterList() {
   const filterString = document.querySelector("#filterInput").value.toLowerCase().trim();
   if (filterString) {
+    console.log(clients);
     const filteredClients = clients.filter((client) => {
-      return client.firstName.toLowerCase().includes(filterString) ||
-        client.lastName.toLowerCase().includes(filterString) ||
+      return client.first_name.toLowerCase().includes(filterString) ||
+        client.last_name.toLowerCase().includes(filterString) ||
         client.email.toLowerCase().includes(filterString) ||
         client.gender.toLowerCase().includes(filterString)
     });
@@ -104,6 +106,32 @@ function removeCurrencyFromAmount(amount) {
 function showResultListSection() {
 
 }
+
+
+function addClient() {
+  const data = {
+    id: 49,
+    first_name: 'Neils',
+    last_name: 'Gourley',
+    email: 'ngourley1c@examiner.com',
+    gender: 'Male',
+    amount: '$3.70',
+    date: '5/29/2019',
+    avatar: 'https://robohash.org/doloreliberofacere.jpg?size=50x50&set=set1'
+  };
+
+  const newId = database.ref().child('clients').push().key;
+  let updates = {};
+  updates[`clients/${newId}`] = data;
+  database.ref().update(updates, function (error) {
+    if (error) {
+      console.error("New client was not added! Error occured!");
+    } else {
+      console.log("Data added to database!");
+    }
+  });
+  console.log()
+};
 
 
 
