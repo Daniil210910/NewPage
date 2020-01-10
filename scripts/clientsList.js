@@ -1,3 +1,22 @@
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    // User is signed in.
+    // let displayName = user.displayName;
+    let email = user.email;
+    alert('Hello ' + email);
+    // let emailVerified = user.emailVerified;
+    // let photoURL = user.photoURL;
+    // let isAnonymous = user.isAnonymous;
+    // let uid = user.uid;
+    // let providerData = user.providerData;
+    // ...
+  } else {
+    window.location.href = "http://127.0.0.1:5501/login.html";
+    // User is signed out.
+    // ...
+  }
+});
+
 function displayData(clientsList = clients) {
   clearList()
   const ul = document.querySelector('#clientsData');
@@ -133,6 +152,15 @@ function addClient() {
   console.log()
 };
 
+function logOut() {
+  firebase.auth().signOut().then(() => {
+    // Sign-out successful.
+    window.location.href = "http://127.0.0.1:5501/login.html"
+  }).catch((error) => {
+    // An error happened.
+    console.error(error);
+  });
+}
 
 
 

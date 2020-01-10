@@ -18,6 +18,7 @@
         <input id="filterInput" class="form-control mr-sm-2" type="Start" placeholder="Search" aria-label="Search"
           onkeyup="filterList()" />
         <a>Total: $ <span class="totalAmountContainer">00.00</span></a>
+        <button class="btn btn-outline-primary" onclick="logOut()">Log out</button>
         <div class="btn-group mx-2" role="group" aria-label="First group">
           <button type="button" class="btn btn-secondary" onclick="sortList('ascending')">A-Z</button>
           <button type="button" class="btn btn-secondary" onclick="sortList('descending')">Z-A</button>
@@ -70,10 +71,6 @@
 <script src="./scripts/firebase.js"></script>
 <script type="text/javascript" src="./scripts/data.js"></script>
 
-<script>
-  (function () {
-    displayData();
-  })();
-</script>
+<script src="./scripts/clientsList.js"></script>
 
 </html>
