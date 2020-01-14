@@ -38,6 +38,22 @@ firebase.auth().onAuthStateChanged(user => {
 
 //Validation
 
+// registerForm.querySelector("[type='password']").addEventListener("blur", event => {
+//     validatePassword(event.target);
+// });
+
+// loginForm.querySelector("[type='password']").addEventListener("blur", event => {
+//     validatePassword(event.target);
+// });
+
+// registerForm.querySelector("[name='email']").addEventListener("blur", event => {
+//     validateEmail(event.target);
+// });
+
+// loginForm.querySelector("[name='email']").addEventListener("blur", event => {
+//     validateEmail(event.target);
+// });
+
 function showLogin() {
     loginForm.style.display = "block";
     registerForm.style.display = "none";
@@ -54,22 +70,58 @@ function togleStatus(newState) {
 }
 
 function validateRegisterForm(target) {
-    validatePassword(target.pass);
-    registerNewUsers(target.email.value, target.pass.value);
+    const isFormValid = validateRequiredFields(target);
+    isFormValid ? registerNewUsers(target.email.value, target.pass.value) : null;
 }
 
 function validateLoginForm(target) {
-    validatePassword(target.pass);
-    logIn(target.email.value, target.pass.value);
+    const isFormValid = validateRequiredFields(target);
+    isFormValid ? logIn(target.email.value, target.pass.value) : null;
     console.log(target.email.value, target.pass.value);
 }
 
+function validateRequiredFields(target) {
+    const isPasswordValid = validatePassword(target.pass);
+    const isEmailValid = validateEmail(target.email);
+    console.log(isPasswordValid);
+    console.log(isEmailValid);
+    return isPasswordValid && isEmailValid;
+
+}
+
 function validatePassword(field) {
-    if (field.value.length < 10) {
-        field.className += " is-invalid";
-    } else {
-        field.className = "form-control is-valid";
+    // if (field.value.length < 10) {
+    //     field.className += " is-invalid";
+    //     return false;
+    // } else {
+    //     field.className = "form-control is-valid";
+    //     return true;
+    // }
+    if (field.value) {
+        markFieldAsValid(field);
+        return true;
     }
+    markFieldAsInvalid(field);
+    return false;
+
+}
+
+function markFieldAsInvalid(field) {
+    field.className += " is-invalid";
+}
+
+function markFieldAsValid(field) {
+    field.className = "form-control is-valid";
+}
+
+function validateEmail(field) {
+    validator.isEmail('foo@bar.com')
+    if (field.value && validator.isEmail(field.value)) {
+        markFieldAsValid(field);
+        return true;
+    }
+    markFieldAsInvalid(field);
+    return false;
 }
 
 function registerNewUsers(email, password) {
@@ -83,5 +135,8 @@ function logIn(email, password) {
 }
 
 function handleError(error) {
-    alert(`Error! ${error.Code} - ${error.Message}`);
+    const alert = document.querySelector(".alert");
+    const message = alert.querySelector(".error-message");
+    message.innerHTML = error.message;
+    alert.className = "alert alert-warning fade show m-4";
 }

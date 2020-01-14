@@ -20,7 +20,7 @@
                         <form method="GET" name="registerForm" class="justify-content-center px-2">
                             <h1 class=" display-4 py-2 text-truncate">Register</h1>
                             <div class="form-group">
-                                <input type="email" class="form-control" id="" name="email" placeholder="Your Email">
+                                <input class="form-control" id="" name="email" placeholder="Your Email">
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" id="" name="pass"
@@ -32,7 +32,7 @@
                         <form method="GET" name="loginForm" class="justify-content-center px-2">
                             <h1 class=" display-4 py-2 text-truncate">Login</h1>
                             <div class="form-group">
-                                <input type="email" class="form-control" id="" name="email" placeholder="Your Email">
+                                <input class="form-control" id="" name="email" placeholder="Your Email">
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" id="" name="pass"
@@ -42,6 +42,10 @@
                             <button type="button" class="btn btn-light"
                                 onclick="togleStatus('register')">Register</button>
                         </form>
+                        <div class="alert alert-error fade show m-4 d-none" role="alert">
+                            <strong>Error!</strong><span class="error-message"></span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,6 +53,7 @@
     </section>
 
 </body>
+<script type="text/javascript" src="libs/validator.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -66,5 +71,8 @@
 <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
 <script src="./scripts/firebase.js"></script>
 <script src="./scripts/login.js"></script>
+<script type="text/javascript">
+    console.log("SYH test", validator.isEmail('foo@bar.com')); //=> true
+</script>
 
 </html>
