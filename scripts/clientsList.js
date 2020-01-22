@@ -17,6 +17,13 @@ firebase.auth().onAuthStateChanged(user => {
   }
 });
 
+const newClientForm = document.querySelector("#newClientForm");
+
+newClientForm.addEventListener("submit", event => {
+  event.preventDefault();
+  addClient(event.target);
+});
+
 function displayData(clientsList = clients) {
   clearList()
   const ul = document.querySelector('#clientsData');
@@ -127,7 +134,8 @@ function showResultListSection() {
 }
 
 
-function addClient() {
+function addClient(form) {
+  console.log(form);
   const data = {
     id: 49,
     first_name: 'Neils',
@@ -139,17 +147,19 @@ function addClient() {
     avatar: 'https://robohash.org/doloreliberofacere.jpg?size=50x50&set=set1'
   };
 
-  const newId = database.ref().child('clients').push().key;
-  let updates = {};
-  updates[`clients/${newId}`] = data;
-  database.ref().update(updates, function (error) {
-    if (error) {
-      console.error("New client was not added! Error occured!");
-    } else {
-      console.log("Data added to database!");
-    }
-  });
-  console.log()
+
+
+  // const newId = database.ref().child('clients').push().key;
+  // let updates = {};
+  // updates[`clients/${newId}`] = data;
+  // database.ref().update(updates, function (error) {
+  //   if (error) {
+  //     console.error("New client was not added! Error occured!");
+  //   } else {
+  //     console.log("Data added to database!");
+  //   }
+  // });
+
 };
 
 function logOut() {

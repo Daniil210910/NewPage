@@ -31,9 +31,65 @@
     </nav>
   </section>
   <section class="container">
-    <div>
-      <button type="button" class="btn btn-primary btn-lg btn-block" onclick="addClient()">Add new client</button>
-    </div>
+    <form id="newClientForm" method="POST">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="First Name">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Last Name">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="clientEmail" aria-describedby="emailHelp" placeholder="Email">
+        <small id="firstName" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="gender" id="genderMail" value="Male">
+        <label class="form-check-label" for="genderMail">
+          Male
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female">
+        <label class="form-check-label" for="genderFemale">
+          Female
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="gender" id="genderOther" value="Other">
+        <label class="form-check-label" for="genderUndefined">
+          Other
+        </label>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="text" class="form-control" id="amount" aria-describedby="emailHelp" placeholder="Amount">
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="text" class="form-control" id="date" aria-describedby="emailHelp" placeholder="Date">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class=" btn btn-link">
+            <i class="fas fa-file-image"></i>
+            Browse Photo
+            <input type="file" hidden>
+          </label>
+        </div>
+      </div>
+      <!-- <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div> -->
+      <button type="bo" class="btn btn-primary btn-lg">Add new client</button>
+    </form>
   </section>
   <section class="container resultList">
     <div class="row">
@@ -57,6 +113,8 @@
     </div>
   </section>
 </body>
+
+<script src="https://kit.fontawesome.com/decdb1dc28.js" crossorigin="anonymous"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
