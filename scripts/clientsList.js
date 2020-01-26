@@ -91,7 +91,7 @@ function clearList() {
 function filterList() {
   const filterString = document.querySelector("#filterInput").value.toLowerCase().trim();
   if (filterString) {
-    console.log(clients);
+    // console.log(clients);
     const filteredClients = clients.filter((client) => {
       return client.first_name.toLowerCase().includes(filterString) ||
         client.last_name.toLowerCase().includes(filterString) ||
@@ -137,28 +137,29 @@ function showResultListSection() {
 function addClient(form) {
   console.log(form);
   const data = {
-    id: 49,
-    first_name: 'Neils',
-    last_name: 'Gourley',
-    email: 'ngourley1c@examiner.com',
-    gender: 'Male',
-    amount: '$3.70',
-    date: '5/29/2019',
-    avatar: 'https://robohash.org/doloreliberofacere.jpg?size=50x50&set=set1'
+    first_name: form.firstName.value,
+    last_name: form.lastName.value,
+    email: form.email.value,
+    gender: form.gender.value,
+    amount: form.amount.value,
+    date: form.date.value,
+    avatar: form.photo.value
   };
 
+  console.log(data);
 
 
-  // const newId = database.ref().child('clients').push().key;
-  // let updates = {};
-  // updates[`clients/${newId}`] = data;
-  // database.ref().update(updates, function (error) {
-  //   if (error) {
-  //     console.error("New client was not added! Error occured!");
-  //   } else {
-  //     console.log("Data added to database!");
-  //   }
-  // });
+
+  const newId = database.ref().child('clients').push().key;
+  let updates = {};
+  updates[`clients/${newId}`] = data;
+  database.ref().update(updates, function (error) {
+    if (error) {
+      console.error("New client was not added! Error occured!");
+    } else {
+      console.log("Data added to database!");
+    }
+  });
 
 };
 

@@ -4,8 +4,6 @@
 <head>
   <title>My Clients Data</title>
   <link rel="stylesheet" type="text/css" href="./styles/clientsList.css" />
-
-  <script type="text/javascript" src="./scripts/clientsList.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 </head>
@@ -34,15 +32,18 @@
     <form id="newClientForm" method="POST">
       <div class="form-group">
         <label for="firstName">First Name</label>
-        <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="First Name">
+        <input name="firstName" type="text" class="form-control" id="firstName" aria-describedby="emailHelp"
+          placeholder="First Name">
       </div>
       <div class="form-group">
         <label for="lastName">Last Name</label>
-        <input type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Last Name">
+        <input name="lastName" type="text" class="form-control" id="lastName" aria-describedby="emailHelp"
+          placeholder="Last Name">
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="clientEmail" aria-describedby="emailHelp" placeholder="Email">
+        <input name="email" type="email" class="form-control" id="clientEmail" aria-describedby="emailHelp"
+          placeholder="Email">
         <small id="firstName" class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
       <div class="form-check form-check-inline">
@@ -67,20 +68,22 @@
         <div class="col-6">
           <div class="form-group">
             <label for="amount">Amount</label>
-            <input type="text" class="form-control" id="amount" aria-describedby="emailHelp" placeholder="Amount">
+            <input name="amount" type="text" class="form-control" id="amount" aria-describedby="emailHelp"
+              placeholder="Amount">
           </div>
         </div>
         <div class="col-6">
           <div class="form-group">
             <label for="date">Date</label>
-            <input type="text" class="form-control" id="date" aria-describedby="emailHelp" placeholder="Date">
+            <input name="data" type="text" class="form-control" id="date" aria-describedby="emailHelp"
+              placeholder="Date">
           </div>
         </div>
         <div class="form-group">
           <label class=" btn btn-link">
             <i class="fas fa-file-image"></i>
             Browse Photo
-            <input type="file" hidden>
+            <input name="photo" type="file" hidden>
           </label>
         </div>
       </div>
