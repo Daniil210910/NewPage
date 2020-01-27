@@ -17,12 +17,17 @@ firebase.auth().onAuthStateChanged(user => {
   }
 });
 
-const newClientForm = document.querySelector("#newClientForm");
 
-newClientForm.addEventListener("submit", event => {
+const newClientForm = document.querySelector("#newClientForm");
+const modalFooter = document.querySelector("#saveClients");
+modalFooter.addEventListener("click", event => {
   event.preventDefault();
-  addClient(event.target);
+  addClient(newClientForm);
 });
+
+
+
+
 
 function displayData(clientsList = clients) {
   clearList()
