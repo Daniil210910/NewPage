@@ -25,36 +25,58 @@ modalFooter.addEventListener("click", event => {
   addClient(newClientForm);
 });
 
-
-
-
-
 function displayData(clientsList = clients) {
   clearList()
   const ul = document.querySelector('#clientsData');
+  for (const property in clientsList) {
+    console.log(`${property}: ${clientsList[property]}`);
+    ul.appendChild(getLiElement(clientsList[property], property));
+  }
   sumAmount(clientsList);
-  clientsList.forEach(client => {
-    const newLi = document.createElement('li');
-    newLi.className = 'media';
-    const avatar = document.createElement('img');
-    avatar.className = 'mr-3 align-self-center';
-    const div = document.createElement('div');
-    div.className = 'media-body';
-    const mailLink = document.createElement('a');
-    avatar.setAttribute('src', client.avatar);
-    const textPart1 = document.createTextNode(
-      `${client.last_name} ${client.first_name} - `
-    );
-    mailLink.setAttribute('href', `mailto:${client.email}`)
-    mailLink.innerHTML = client.email;
-    const textPart2 = document.createTextNode(`${client.email}, ${client.gender} (${client.date} - ${client.amount})`);
-    div.appendChild(textPart1);
-    div.appendChild(mailLink);
-    div.appendChild(textPart2);
-    newLi.appendChild(avatar);
-    newLi.appendChild(div);
-    ul.appendChild(newLi);
+  // clientsList.forEach(client => {
+
+  // });
+}
+
+function getLiElement(client, id) {
+  const newLi = document.createElement('li');
+  const avatar = document.createElement('img');
+  newLi.className = 'media';
+  newLi.id = id;
+  avatar.className = 'mr-3 align-self-center';
+  avatar.setAttribute('src', client.avatar);
+  newLi.appendChild(avatar);
+  newLi.appendChild(createClientDescrirption(client, id));
+  return newLi;
+}
+
+function createClientDescrirption(client, id) {
+  const div = document.createElement('div');
+  div.className = 'media-body';
+  const mailLink = document.createElement('a');
+  mailLink.setAttribute('href', `mailto:${client.email}`)
+  mailLink.innerHTML = client.email;
+  const textPart1 = document.createTextNode(
+    `${client.last_name} ${client.first_name} - `
+  );
+  const textPart2 = document.createTextNode(`${client.email}, ${client.gender} (${client.date} - ${client.amount})`);
+  div.appendChild(textPart1);
+  div.appendChild(mailLink);
+  div.appendChild(textPart2);
+  const deleteLink = document.createElement('a');
+  deleteLink.innerHTML = " Delete";
+  deleteLink.setAttribute("href", "#");
+  deleteLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    deleteClient(id);
   });
+  div.appendChild(deleteLink);
+  return div;
+}
+
+function deleteClient(id) {
+  const clientRef = database.ref(`clients/${id}`);
+  clientRef.remove();
 }
 
 function sortList(order) {
