@@ -69,14 +69,7 @@ function createClientDescrirption(client, id) {
   );
   const textPart2 = document.createTextNode(`${client.email}, ${client.gender} (${client.date} - ${client.amount})`);
 
-  const deleteLink = document.createElement('a');
-  deleteLink.innerHTML = " Delete";
-  deleteLink.setAttribute("href", "#");
-  deleteLink.classList.add("mx-1");
-  deleteLink.addEventListener("click", (event) => {
-    event.preventDefault();
-    deleteClient(id);
-  });
+  const deleteLink = createDeleteLink(id);
 
   const editLink = createEditLink(id);
 
@@ -87,9 +80,30 @@ function createClientDescrirption(client, id) {
   div.appendChild(deleteLink);
   return div;
 }
-{/* <a href="#" data-toggle="modal" data-target="#editClientModal">
-  Launch demo modal
-    </a> */}
+// {/* <a href="#" data-toggle="modal" data-target="#editClientModal">
+//   Launch demo modal
+//     </a> */}
+
+function createDeleteLink(id) {
+  const deleteLink = document.createElement('a');
+  deleteLink.innerHTML = " Delete";
+  deleteLink.setAttribute("href", "#");
+  deleteLink.setAttribute("data-toggle", "modal");
+  deleteLink.setAttribute("data-target", "#deleteModal");
+  deleteLink.classList.add("mx-1");
+
+  const deleteModalButton = document.querySelector("#deleteModalButton");
+  // console.log(deleteModalButton);
+
+  deleteModalButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    deleteClient(id);
+  });
+
+  return deleteLink;
+}
+
+
 
 function createEditLink(id) {
   const editLink = document.createElement('a');
@@ -107,7 +121,9 @@ function createEditLink(id) {
 }
 
 function fillClientForm(id) {
-
+  // console.log(id);
+  // console.log(clients[id]);
+  // console.log(clients);
   // const currentClient = clients.find(client => client.clientId == )
   if (editClientForm) {
     editClientForm.firstName.value = clients[id].first_name;
@@ -118,9 +134,7 @@ function fillClientForm(id) {
     editClientForm.date.value = clients[id].date;
     editClientForm.clientID.value = id;
     // console.log(clients[id]);
-    console.log(id);
-    console.log(clients[id]);
-    console.log(clients);
+
   }
 
 }
