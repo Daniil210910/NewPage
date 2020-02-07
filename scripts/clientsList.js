@@ -25,6 +25,14 @@ modalFooter.addEventListener("click", event => {
   addClient(newClientForm);
 });
 
+const editClientForm = document.querySelector("#editClientForm");
+const editClientSave = document.querySelector("#editClient");
+editClientSave.addEventListener("click", event => {
+  event.preventDefault();
+  editClient(editClientForm);
+});
+
+
 function displayData(clientsList = clients) {
   clearList()
   const ul = document.querySelector('#clientsData');
@@ -60,18 +68,81 @@ function createClientDescrirption(client, id) {
     `${client.last_name} ${client.first_name} - `
   );
   const textPart2 = document.createTextNode(`${client.email}, ${client.gender} (${client.date} - ${client.amount})`);
-  div.appendChild(textPart1);
-  div.appendChild(mailLink);
-  div.appendChild(textPart2);
+
   const deleteLink = document.createElement('a');
   deleteLink.innerHTML = " Delete";
   deleteLink.setAttribute("href", "#");
+  deleteLink.classList.add("mx-1");
   deleteLink.addEventListener("click", (event) => {
     event.preventDefault();
     deleteClient(id);
   });
+
+  const editLink = createEditLink(id);
+
+  div.appendChild(textPart1);
+  div.appendChild(mailLink);
+  div.appendChild(textPart2);
+  div.appendChild(editLink);
   div.appendChild(deleteLink);
   return div;
+}
+{/* <a href="#" data-toggle="modal" data-target="#editClientModal">
+  Launch demo modal
+    </a> */}
+
+function createEditLink(id) {
+  const editLink = document.createElement('a');
+  editLink.innerHTML = " Edit";
+  editLink.setAttribute("href", "#");
+  editLink.setAttribute("data-toggle", "modal");
+  editLink.setAttribute("data-client-id", "id");
+  editLink.classList.add("mx-1");
+  editLink.classList.add("edit-klient-link");
+  editLink.setAttribute("data-target", "#editClientModal");
+  editLink.addEventListener("click", () => {
+    fillClientForm(id);
+  });
+  return editLink;
+}
+
+function fillClientForm(id) {
+
+  // const currentClient = clients.find(client => client.clientId == )
+  if (editClientForm) {
+    editClientForm.firstName.value = clients[id].first_name;
+    editClientForm.lastName.value = clients[id].last_name;
+    editClientForm.email.value = clients[id].email;
+    editClientForm.gender.value = clients[id].gender;
+    editClientForm.amount.value = clients[id].amount;
+    editClientForm.date.value = clients[id].date;
+    editClientForm.clientID.value = id;
+    // console.log(clients[id]);
+    console.log(id);
+    console.log(clients[id]);
+    console.log(clients);
+  }
+
+}
+
+function editClient(form) {
+  console.log(form.firstName.value);
+  console.log(form);
+  const data = {
+    first_name: form.firstName.value,
+    last_name: form.lastName.value,
+    email: form.email.value,
+    gender: form.gender.value,
+    amount: form.amount.value,
+    date: form.date.value
+  };
+
+  const id = form.clientID.value;
+  let updates = {};
+  updates[`clients/${id}`] = data;
+
+  if (id) updateDB(updates);
+  console.log(id, data);
 }
 
 function deleteClient(id) {
@@ -160,7 +231,6 @@ function showResultListSection() {
 
 }
 
-
 function addClient(form) {
   console.log(form);
   const data = {
@@ -173,22 +243,22 @@ function addClient(form) {
     avatar: form.photo.value
   };
 
-  console.log(data);
-
-
-
   const newId = database.ref().child('clients').push().key;
   let updates = {};
   updates[`clients/${newId}`] = data;
-  database.ref().update(updates, function (error) {
-    if (error) {
-      console.error("New client was not added! Error occured!");
-    } else {
-      console.log("Data added to database!");
-    }
-  });
+  updateDB(updates);
 
 };
+
+function updateDB(updates) {
+  database.ref().update(updates, function (error) {
+    if (error) {
+      console.error("New client was not added or was not saved! Error occured!");
+    } else {
+      console.log("Data added/saved to database!");
+    }
+  });
+}
 
 function logOut() {
   firebase.auth().signOut().then(() => {

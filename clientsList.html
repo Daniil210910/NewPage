@@ -16,7 +16,7 @@
         <input id="filterInput" class="form-control mr-sm-2" type="Start" placeholder="Search" aria-label="Search"
           onkeyup="filterList()" />
         <a>Total: $ <span class="totalAmountContainer">00.00</span></a>
-        <button class="btn btn-outline-primary" onclick="logOut()">Log out</button>
+        <button class="btn btn-outline-primary m-2" onclick="logOut()">Log out</button>
         <div class="btn-group mx-2" role="group" aria-label="First group">
           <button type="button" class="btn btn-secondary" onclick="sortList('ascending')">A-Z</button>
           <button type="button" class="btn btn-secondary" onclick="sortList('descending')">Z-A</button>
@@ -27,7 +27,7 @@
         </div>
       </form>
     </nav>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="addNewClientModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -111,9 +111,12 @@
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-primary btn-lg m-2" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="btn btn-primary btn-lg my-2" data-toggle="modal" data-target="#addNewClientModal">
       Add new client
     </button>
+    <!-- <a href="#" data-toggle="modal" data-target="#editClientModal">
+      Launch demo modal
+    </a> -->
   </section>
   <section class="container resultList">
     <div class="row">
@@ -136,6 +139,92 @@
       </div>
     </div>
   </section>
+  <div class="modal fade" id="editClientModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="editClientForm" method="POST">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input name="firstName" type="text" class="form-control" id="firstName" disabled
+                aria-describedby="emailHelp" placeholder="First Name">
+
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input name="lastName" type="text" class="form-control" id="lastName" disabled
+                aria-describedby="emailHelp" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input name="email" type="email" class="form-control" id="clientEmail" aria-describedby="emailHelp"
+                placeholder="Email">
+              <small id="firstName" class="form-text text-muted">We'll never share your email with anyone
+                else.</small>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="genderMail" value="Male">
+              <label class="form-check-label" for="genderMail">
+                Male
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female">
+              <label class="form-check-label" for="genderFemale">
+                Female
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="genderOther" value="Other">
+              <label class="form-check-label" for="genderUndefined">
+                Other
+              </label>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="amount">Amount</label>
+                  <input name="amount" type="text" class="form-control" id="amount" aria-describedby="emailHelp"
+                    placeholder="Amount">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="date">Date</label>
+                  <input name="data" type="text" class="form-control" id="date" aria-describedby="emailHelp"
+                    placeholder="Date">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class=" btn btn-link">
+                  <i class="fas fa-file-image"></i>
+                  Browse Photo
+                  <input name="photo" type="file" hidden>
+                </label>
+              </div>
+            </div>
+            <input type="text" readonly disabled hidden name="clientID">
+            <!-- <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div> -->
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" id="editClient" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 <script src="https://kit.fontawesome.com/decdb1dc28.js" crossorigin="anonymous"></script>
