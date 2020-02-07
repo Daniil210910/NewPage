@@ -92,10 +92,10 @@ function createDeleteLink(id) {
   deleteLink.setAttribute("data-target", "#deleteModal");
   deleteLink.classList.add("mx-1");
 
-  const deleteModalButton = document.querySelector("#deleteModalButton");
+
   // console.log(deleteModalButton);
 
-  deleteModalButton.addEventListener("click", (event) => {
+  deleteLink.addEventListener("click", (event) => {
     event.preventDefault();
     deleteClient(id);
   });
@@ -160,8 +160,12 @@ function editClient(form) {
 }
 
 function deleteClient(id) {
-  const clientRef = database.ref(`clients/${id}`);
-  clientRef.remove();
+  const deleteModalButton = document.querySelector("#deleteModalButton");
+
+  deleteModalButton.addEventListener("click", () => {
+    const clientRef = database.ref(`clients/${id}`);
+    clientRef.remove();
+  });
 }
 
 function sortList(order) {
