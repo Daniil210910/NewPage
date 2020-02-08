@@ -103,8 +103,6 @@ function createDeleteLink(id) {
   return deleteLink;
 }
 
-
-
 function createEditLink(id) {
   const editLink = document.createElement('a');
   editLink.innerHTML = " Edit";
