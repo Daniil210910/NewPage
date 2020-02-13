@@ -28,37 +28,43 @@ modalFooter.addEventListener("click", event => {
 const editClientForm = document.querySelector("#editClientForm");
 const editClientSave = document.querySelector("#editClient");
 editClientSave.addEventListener("click", event => {
+  // id = client.id;
+  // console.log(client);
   event.preventDefault();
   editClient(editClientForm);
+
 });
 
 
 function displayData(clientsList = clients) {
+  console.log(clientsList);
   clearList()
   const ul = document.querySelector('#clientsData');
-  for (const property in clientsList) {
-    console.log(`${property}: ${clientsList[property]}`);
-    ul.appendChild(getLiElement(clientsList[property], property));
-  }
+  clientsList.forEach(client => {
+    ul.appendChild(getLiElement(client));
+  });
   sumAmount(clientsList);
   // clientsList.forEach(client => {
 
   // });
 }
 
-function getLiElement(client, id) {
+function getLiElement(client) {
+
+
   const newLi = document.createElement('li');
   const avatar = document.createElement('img');
   newLi.className = 'media';
-  newLi.id = id;
+  newLi.id = client.clientID;
   avatar.className = 'mr-3 align-self-center';
   avatar.setAttribute('src', client.avatar);
   newLi.appendChild(avatar);
-  newLi.appendChild(createClientDescrirption(client, id));
+  newLi.appendChild(createClientDescrirption(client));
   return newLi;
 }
 
 function createClientDescrirption(client, id) {
+
   const div = document.createElement('div');
   div.className = 'media-body';
   const mailLink = document.createElement('a');
@@ -69,9 +75,9 @@ function createClientDescrirption(client, id) {
   );
   const textPart2 = document.createTextNode(`${client.email}, ${client.gender} (${client.date} - ${client.amount})`);
 
-  const deleteLink = createDeleteLink(id);
+  const deleteLink = createDeleteLink(client);
 
-  const editLink = createEditLink(id);
+  const editLink = createEditLink(client, id);
 
   div.appendChild(textPart1);
   div.appendChild(mailLink);
@@ -84,7 +90,8 @@ function createClientDescrirption(client, id) {
 //   Launch demo modal
 //     </a> */}
 
-function createDeleteLink(id) {
+function createDeleteLink(client) {
+
   const deleteLink = document.createElement('a');
   deleteLink.innerHTML = " Delete";
   deleteLink.setAttribute("href", "#");
@@ -92,18 +99,17 @@ function createDeleteLink(id) {
   deleteLink.setAttribute("data-target", "#deleteModal");
   deleteLink.classList.add("mx-1");
 
-
-  // console.log(deleteModalButton);
-
   deleteLink.addEventListener("click", (event) => {
     event.preventDefault();
+    id = client.clientID;
+    console.log(id);
     deleteClient(id);
   });
 
   return deleteLink;
 }
 
-function createEditLink(id) {
+function createEditLink(client, id) {
   const editLink = document.createElement('a');
   editLink.innerHTML = " Edit";
   editLink.setAttribute("href", "#");
@@ -113,16 +119,16 @@ function createEditLink(id) {
   editLink.classList.add("edit-klient-link");
   editLink.setAttribute("data-target", "#editClientModal");
   editLink.addEventListener("click", () => {
-    fillClientForm(id);
+    fillClientForm(client, id);
   });
   return editLink;
 }
 
-function fillClientForm(id) {
+function fillClientForm(client, id) {
   // console.log(id);
   // console.log(clients[id]);
-  // console.log(clients);
-  // const currentClient = clients.find(client => client.clientId == )
+  // // console.log(clients);
+  // const currentClient = clients.find(client => client.clientId);
   if (editClientForm) {
     editClientForm.firstName.value = clients[id].first_name;
     editClientForm.lastName.value = clients[id].last_name;
@@ -130,7 +136,7 @@ function fillClientForm(id) {
     editClientForm.gender.value = clients[id].gender;
     editClientForm.amount.value = clients[id].amount;
     editClientForm.date.value = clients[id].date;
-    editClientForm.clientID.value = id;
+    // editClientForm.clientID.value = id;
     // console.log(clients[id]);
 
   }
@@ -157,11 +163,13 @@ function editClient(form) {
   console.log(id, data);
 }
 
-function deleteClient(id) {
+function deleteClient(id, form) {
+  // const idi = form.clientID.value;
   const deleteModalButton = document.querySelector("#deleteModalButton");
 
   deleteModalButton.addEventListener("click", () => {
     const clientRef = database.ref(`clients/${id}`);
+    console.log(id);
     clientRef.remove();
   });
 }

@@ -1,0 +1,27 @@
+{
+  "name": "newpage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "data.js",
+  "scripts": {
+    "start": "parcel clientsList.html",
+    "build": "parcel build clientsList.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daniil210910/NewPage.git"
+  },
+  "keywords": [
+    "crm",
+    "client"
+  ],
+  "author": "Daniil Kravchenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Daniil210910/NewPage/issues"
+  },
+  "homepage": "https://github.com/Daniil210910/NewPage#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
