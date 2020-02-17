@@ -1,3 +1,15 @@
+import "bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import "../styles/clientsList.css"
+
+const firebase = require("firebase/app");
+require("firebase/auth");
+import * as validator from "validator"
+import { initApp } from "./firebase.js";
+
+initApp();
+
 let state = "login";
 
 const registerForm = document.querySelector("[name='registerForm']");
@@ -16,6 +28,18 @@ loginForm.addEventListener("submit", event => {
 
 togleStatus(state);
 
+const toggleButtons = [
+    { id: "toggleRegister", value: "register" },
+    { id: "toggleLogin", value: "login" }
+];
+
+toggleButtons.forEach(button => {
+    const element = document.querySelector(`#${button.id}`);
+    element.addEventListener("click", () => {
+        togleStatus(button.value);
+    });
+});
+
 //Observe changes
 
 firebase.auth().onAuthStateChanged(user => {
@@ -23,7 +47,7 @@ firebase.auth().onAuthStateChanged(user => {
         // User is signed in.
         // let displayName = user.displayName;
         let email = user.email;
-        window.location.href = "http://127.0.0.1:5501/clientsList.html";
+        window.location.href = "./clientsList.html";
         // let emailVerified = user.emailVerified;
         // let photoURL = user.photoURL;
         // let isAnonymous = user.isAnonymous;
