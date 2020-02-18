@@ -23,7 +23,7 @@ firebase.auth().onAuthStateChanged(user => {
         // User is signed in.
         // let displayName = user.displayName;
         let email = user.email;
-        window.location.href = "http://127.0.0.1:5501/clientsList.html";
+        window.location.href = "./clientsList.html";
         // let emailVerified = user.emailVerified;
         // let photoURL = user.photoURL;
         // let isAnonymous = user.isAnonymous;

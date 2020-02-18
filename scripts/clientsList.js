@@ -11,7 +11,7 @@ firebase.auth().onAuthStateChanged(user => {
     // let providerData = user.providerData;
     // ...
   } else {
-    window.location.href = "http://127.0.0.1:5501/login.html";
+    window.location.href = "./login.html";
     // User is signed out.
     // ...
   }
@@ -136,7 +136,7 @@ function fillClientForm(client, id) {
     editClientForm.gender.value = clients[id].gender;
     editClientForm.amount.value = clients[id].amount;
     editClientForm.date.value = clients[id].date;
-    // editClientForm.clientID.value = id;
+    editClientForm.clientID.value = id;
     // console.log(clients[id]);
 
   }
@@ -287,7 +287,7 @@ function updateDB(updates) {
 function logOut() {
   firebase.auth().signOut().then(() => {
     // Sign-out successful.
-    window.location.href = "http://127.0.0.1:5501/login.html"
+    window.location.href = "./login.html"
   }).catch((error) => {
     // An error happened.
     console.error(error);
