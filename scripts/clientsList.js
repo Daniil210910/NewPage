@@ -170,13 +170,13 @@ function fillClientForm(client, id) {
   // // console.log(clients);
   // const currentClient = clients.find(client => client.clientId);
   if (editClientForm) {
-    editClientForm.firstName.value = clients[id].first_name;
-    editClientForm.lastName.value = clients[id].last_name;
+    editClientForm.firstName.value = clients[id].firstName;
+    editClientForm.lastName.value = clients[id].lastName;
     editClientForm.email.value = clients[id].email;
     editClientForm.gender.value = clients[id].gender;
     editClientForm.amount.value = clients[id].amount;
     editClientForm.date.value = clients[id].date;
-    // editClientForm.clientID.value = id;
+    editClientForm.clientID.value = id;
     // console.log(clients[id]);
 
   }
