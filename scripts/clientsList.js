@@ -1,3 +1,18 @@
+import "bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import "../styles/clientsList.css"
+
+const firebase = require("firebase/app");
+require("firebase/auth");
+require("firebase/database");
+import { initApp } from "./firebase.js";
+import { getData, clients } from "./data";
+
+initApp();
+getData();
+
+
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     // User is signed in.
@@ -18,6 +33,8 @@ firebase.auth().onAuthStateChanged(user => {
 });
 
 
+
+
 const newClientForm = document.querySelector("#newClientForm");
 const modalFooter = document.querySelector("#saveClients");
 modalFooter.addEventListener("click", event => {
@@ -35,8 +52,31 @@ editClientSave.addEventListener("click", event => {
 
 });
 
+const sortsFields = [
+  { id: "sortAscending", value: "ascending" },
+  { id: "sortDescending", value: "descending" }
+];
 
-function displayData(clientsList = clients) {
+sortsFields.forEach(field => {
+  const element = document.querySelector(`#${field.id}`);
+  element.addEventListener("click", () => {
+    sortList(field.value);
+  });
+});
+
+const filterField = document.querySelector('#filterInput');
+
+filterField.addEventListener("keyup", event => {
+  filterList(event);
+});
+
+const logOutBtn = document.querySelector('#logOut');
+
+logOutBtn.addEventListener("click", () => {
+  logOut();
+})
+
+export function displayData(clientsList = clients) {
   console.log(clientsList);
   clearList()
   const ul = document.querySelector('#clientsData');
@@ -130,8 +170,8 @@ function fillClientForm(client, id) {
   // // console.log(clients);
   // const currentClient = clients.find(client => client.clientId);
   if (editClientForm) {
-    editClientForm.firstName.value = clients[id].first_name;
-    editClientForm.lastName.value = clients[id].last_name;
+    editClientForm.firstName.value = clients[id].firstName;
+    editClientForm.lastName.value = clients[id].lastName;
     editClientForm.email.value = clients[id].email;
     editClientForm.gender.value = clients[id].gender;
     editClientForm.amount.value = clients[id].amount;
@@ -168,7 +208,7 @@ function deleteClient(id, form) {
   const deleteModalButton = document.querySelector("#deleteModalButton");
 
   deleteModalButton.addEventListener("click", () => {
-    const clientRef = database.ref(`clients/${id}`);
+    const clientRef = firebase.database().ref(`clients/${id}`);
     console.log(id);
     clientRef.remove();
   });
@@ -210,8 +250,8 @@ function clearList() {
   }
 }
 
-function filterList() {
-  const filterString = document.querySelector("#filterInput").value.toLowerCase().trim();
+function filterList(event) {
+  const filterString = event.target.value.toLowerCase().trim();
   if (filterString) {
     // console.log(clients);
     const filteredClients = clients.filter((client) => {
@@ -267,7 +307,7 @@ function addClient(form) {
     avatar: form.photo.value
   };
 
-  const newId = database.ref().child('clients').push().key;
+  const newId = firebase.database().ref().child('clients').push().key;
   let updates = {};
   updates[`clients/${newId}`] = data;
   updateDB(updates);
@@ -275,7 +315,7 @@ function addClient(form) {
 };
 
 function updateDB(updates) {
-  database.ref().update(updates, function (error) {
+  firebase.database().ref().update(updates, function (error) {
     if (error) {
       console.error("New client was not added or was not saved! Error occured!");
     } else {

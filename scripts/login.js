@@ -1,3 +1,15 @@
+import "bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import "../styles/clientsList.css"
+
+const firebase = require("firebase/app");
+require("firebase/auth");
+import * as validator from "validator"
+import { initApp } from "./firebase.js";
+
+initApp();
+
 let state = "login";
 
 const registerForm = document.querySelector("[name='registerForm']");
@@ -15,6 +27,18 @@ loginForm.addEventListener("submit", event => {
 });
 
 togleStatus(state);
+
+const toggleButtons = [
+    { id: "toggleRegister", value: "register" },
+    { id: "toggleLogin", value: "login" }
+];
+
+toggleButtons.forEach(button => {
+    const element = document.querySelector(`#${button.id}`);
+    element.addEventListener("click", () => {
+        togleStatus(button.value);
+    });
+});
 
 //Observe changes
 
